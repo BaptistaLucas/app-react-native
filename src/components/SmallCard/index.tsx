@@ -1,18 +1,27 @@
 import React from "react";
 import Charmander from '../../assets/pokemons/Charmander.svg'
+import { PokemonDTO } from "../../screens/dtos/PokemonDTO";
+import retornaSvg from "../../utils/retornaSvg";
 import { Codigo, Container, ConteudoCodigo, ConteudoNome, ConteudoSvg, Nome } from "./styles";
-
-function SmallCard(){
+interface SmallCardsProps{
+    pokemon: PokemonDTO
+}
+function SmallCard({pokemon}:SmallCardsProps){
     return(
-        <Container>
+        <Container
+            type = {pokemon.types[0].name}
+        >
             <ConteudoCodigo>
-                <Codigo>#001</Codigo>
+                <Codigo
+                type={pokemon.types[0].name}>{pokemon.code}</Codigo>
             </ConteudoCodigo>
             <ConteudoSvg>
-                <Charmander width={72} height={72}/>
+                {
+                    retornaSvg(pokemon.name)
+                }
             </ConteudoSvg>
-            <ConteudoNome>
-                <Nome> Charmander</Nome>
+            <ConteudoNome type = {pokemon.types[0].name}>
+                <Nome> {pokemon.name}</Nome>
             </ConteudoNome>
         </Container>
     )
