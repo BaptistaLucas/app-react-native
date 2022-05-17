@@ -2,6 +2,9 @@ import { Poppins_400Regular, Poppins_700Bold, useFonts } from '@expo-google-font
 import React from 'react';
 import { View } from 'react-native';
 import { ThemeProvider } from 'styled-components';
+import Routes from './src/routes';
+import AppRoutes from './src/routes/app.routes';
+import Detalhes from './src/screens/Detalhes';
 import Home from './src/screens/Home';
 import theme from './src/styles/theme';
 
@@ -21,7 +24,7 @@ export default function App() {
   return (
     
     <ThemeProvider theme={theme}>
-      <Home/>
+      <Routes/>
     </ThemeProvider>
   
   );

@@ -1,5 +1,6 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { FlatList, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { Dimensions, FlatList, Keyboard, ScrollView, TouchableWithoutFeedback } from "react-native";
 
 import Pokebola from '../../assets/icons/pokeball.svg';
 import SortAsc from '../../assets/icons/sortasc.svg';
@@ -15,26 +16,26 @@ import{
     Titulo,
     BotaoOrdenacao,
     InputTexto
-    
-
 }from "./styles"
 
 function Home(){
-    const[decrescente, setDecrescente] = useState(false);
-    const[nomeFiltro, setNomeFiltro] = useState('');
-    const [pokemons, SetPokemons]= useState<PokemonDTO[]>([]);
-    const [pokemonsFilter, SetPokemonFiltros]= useState<PokemonDTO[]>([]);
+    /*inicio criação estados*/
+    const [decrescente, setDecrescente] = useState(false); // filtro ascendente e decrescente 
+    const [nomeFiltro, setNomeFiltro] = useState(''); // filtro nome
+    const [pokemons, SetPokemons]= useState<PokemonDTO[]>([]); // criar a lista de pokemons
+    const [pokemonsFilter, SetPokemonFiltros]= useState<PokemonDTO[]>([]); // pokemons filtrados
+    /*fim criação estados*/
+
+
 
     function alteraTipoFiltro(){
         setDecrescente(estadoAnterior => !estadoAnterior);
     }
 
     function alteraNomeFiltro(nome: string){
-        console.log(nome);
-        setNomeFiltro(nome);
-        const filtrados = pokemons.filter( p=> p.name.toLowerCase().includes(nome.toLowerCase()))
-        SetPokemonFiltros(filtrados);
-        console.log(filtrados);
+        setNomeFiltro(nome); /* atualiza o nome do filtro, com o nome escrito pelo usuario */
+        const filtrados = pokemons.filter( p=> p.name.toLowerCase().includes(nome.toLowerCase())); {/* buscando na lista de pokemons, se existe o pokemon digitado pelo usuario */}
+        SetPokemonFiltros(filtrados); /* passando o resultado da pesquisa */
 
     }
 
@@ -52,50 +53,52 @@ function Home(){
        
     }
 
-    useEffect(() => {
+    useEffect(() => { // useEffect para toda vez q entrar na tela, chamar a função getPokemons
         getPokemons();
     }, [decrescente]);
-
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
+        /* Inicio criação dos componentes */
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>  
             <Container>
-            <Header>
-                <ConteudoTitulo>
-                    <Pokebola width={24} height={24}/>
-                    <></> 
-                    <Titulo>Pokemon</Titulo>
-                </ConteudoTitulo>
-                <BotaoOrdenacao
-                    onPress={() => alteraTipoFiltro()}
-                >
-                    {
-                        decrescente ? <SortAsc/> : <SortDesc/>
-                    }
-                </BotaoOrdenacao>
-            </Header>
-            <InputTexto 
-            placeholder="Procurar"
-            onChangeText={(texto) => alteraNomeFiltro(texto)} 
-            keyboardAppearance="dark"
-            
-            />
-            <FlatList
-                data={pokemonsFilter}
-                keyExtractor={(item) => item.id.toString()}
-                numColumns={3}
-                contentContainerStyle={{
-                    alignItems : 'center',
-                    justifyContent: 'center'
-                }}
-                style={{
-                    width: '100%'
-                }}
-                renderItem={({item}) => (
-                    <SmallCard pokemon={item}/>
-                )}
-            />
-        </Container>
+                <Header>
+                    <ConteudoTitulo>  
+                        <Pokebola width={24} height={24}/>
+                        <></> 
+                        <Titulo>Pokemon</Titulo>
+                    </ConteudoTitulo>
 
+                    <BotaoOrdenacao
+                        onPress={() => alteraTipoFiltro()}  /* chamando a função de alterar o tipo do filtro apos o click*/
+                    >
+                        {
+                            decrescente ? <SortAsc/> : <SortDesc/>
+                        }
+                    </BotaoOrdenacao>
+                </Header>
+                <InputTexto 
+                    placeholder="Procurar"
+                    onChangeText={(texto) => alteraNomeFiltro(texto)} // quando mudar, chama função para filtrar pelo nome dos pokemons
+                    keyboardAppearance="dark"
+                    value={nomeFiltro}
+                />
+                <FlatList
+                    data={pokemonsFilter} //lista dos pokemons que serão passados
+                    keyExtractor={(item) => item.id.toString()} // falar o identificador
+                    numColumns={3} // quantidade de colunas
+                    contentContainerStyle={{ //estilização
+                        alignItems : 'center',
+                        justifyContent: 'center',
+                       
+                    }}
+                    style={{ //estilização
+                        width: '100%'
+                    }}
+                    // qual componente será renderizado, quando iterarmos a lista
+                    renderItem={({item}) => (
+                        <SmallCard pokemon={item} />
+                    )}
+                />
+            </Container>
         </TouchableWithoutFeedback>
         
     )

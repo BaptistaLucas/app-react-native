@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
+import { PokemonName } from "../../screens/dtos/PokemonDTO";
 
 interface Props{
-    type: string;
+    type: PokemonName;
 }
 export const Container = styled.TouchableOpacity<Props>`
     width: 104px;
@@ -10,7 +11,7 @@ export const Container = styled.TouchableOpacity<Props>`
     border-width: 1px;
     border-color: ${({theme, type}) => theme[type]};
     background-color: ${({theme}) => theme.white};
-    margin: 8px 8px 8px 0px
+    margin: 8px 4px 8px 4px
 `;
 
 export const ConteudoCodigo = styled.View`
@@ -38,7 +39,7 @@ export const ConteudoNome = styled.View<Props>`
     background-color: ${({theme, type}) => theme[type]};
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    padding: 4px 8px;
+    padding: 2px 8px;
 `;
 
 export const Nome = styled.Text`

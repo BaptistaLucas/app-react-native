@@ -1,10 +1,13 @@
 import styled from "styled-components/native";
+import {Dimensions} from 'react-native';
 
 
 export const Container = styled.View`
     flex:1;
     background-color: ${({theme}) => theme.background};
-    padding: 0px 16px;
+    padding: ${Dimensions.get('screen').width <= 384 ? '0px 16px' : '0px 8px'};
+   
+    
 `;
 
 export const Header = styled.View`
