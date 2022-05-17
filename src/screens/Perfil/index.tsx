@@ -1,8 +1,11 @@
 import React from "react";
 import { Image } from "react-native";
+import { useAuth } from "../../hooks/auth";
 import { BackgroundImage, BotaoSair, Container, Conteudo, Header, Sair, Titulo } from "./styles";
 
 function Perfil (){
+
+    const {usuario, } = useAuth();
     return (
         <Container>
             <Header>
@@ -21,7 +24,7 @@ function Perfil (){
                         }} 
                     />
                 </BackgroundImage>
-                <Titulo>Lucas</Titulo>
+                <Titulo>{usuario}</Titulo>
                 <BotaoSair>
                     <Sair>Sair</Sair>
                 </BotaoSair>
