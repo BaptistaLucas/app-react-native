@@ -2,7 +2,7 @@ import { Poppins_400Regular, Poppins_700Bold, useFonts } from '@expo-google-font
 import React from 'react';
 import { View } from 'react-native';
 import { ThemeProvider } from 'styled-components';
-import { AuthContext } from './src/contexts/AurhContext';
+import { AuthContext } from './src/contexts/AuthContext';
 import {AuthProvider} from './src/hooks/auth';
 import Routes from './src/routes';
 import AppRoutes from './src/routes/app.routes';
@@ -25,8 +25,8 @@ export default function App() {
   }
   return (
     
-    <ThemeProvider theme={theme}>
-      <AuthProvider>
+    <ThemeProvider theme={theme}> 
+      <AuthProvider> 
         <Routes/>
       </AuthProvider>
       

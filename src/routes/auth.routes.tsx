@@ -5,8 +5,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
 function AuthRoutes(){
-<Stack.Navigator
-      screenOptions={{
+  return (
+    <Stack.Navigator
+       screenOptions={{
         headerShown: false,
       }}
     >
@@ -14,4 +15,9 @@ function AuthRoutes(){
 
     </Stack.Navigator>
 
+  )
+
+
 }
+
+export default AuthRoutes;

@@ -1,5 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
+import { Alert } from "react-native";
 import { useTheme } from "styled-components";
 import { PokemonDTO } from "../../screens/dtos/PokemonDTO";
 import retornaSvg from "../../utils/retornaSvg";
@@ -7,13 +8,31 @@ import TypeCard from "../TypeCard";
 import { Botao, Container, ConteudoSvg, ConteudoTexto, Descricao, LabelBold, Opcao, Tipos } from "./styles";
 
 interface FavoritoCardProps{ 
-    pokemon: PokemonDTO
+    pokemon: PokemonDTO;
+    funcaoRemover: (id:number) => void
+
 
 }
 
-function FavoriteCard({pokemon}: FavoritoCardProps){
+function FavoriteCard({pokemon, funcaoRemover}: FavoritoCardProps){
 
     const tema = useTheme();
+
+    function removerPokemonFavoritos(pokemon: PokemonDTO){
+        Alert.alert('Confirme', 
+        `Deseja realmente remover o ${pokemon.name} do seus favoritos?`,
+        [
+            {
+                text: 'Não 😊',
+                style: "cancel",
+                onPress: () => {}                
+            },
+            {
+                text: 'Sim 😢',
+                onPress: () => funcaoRemover(pokemon.id)                
+            }
+        ])
+    }
 
     return(
         <Container>
@@ -50,7 +69,9 @@ function FavoriteCard({pokemon}: FavoritoCardProps){
                 </Tipos>
             </ConteudoTexto>
             <Opcao>
-                <Botao>
+                <Botao 
+                    onPress={()=> removerPokemonFavoritos(pokemon)}
+                >
                     <MaterialCommunityIcons
                         name="heart-broken"
                         size={20}

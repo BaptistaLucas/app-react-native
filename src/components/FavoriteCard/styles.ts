@@ -5,7 +5,7 @@ interface Props{
     type: PokemonName
 }
 export const Container = styled.View`
-    width: 100%;
+    width: 85%;
     flex-direction: row;
     background-color: ${({theme}) => theme.white};
     border-radius: 8px;
@@ -13,6 +13,7 @@ export const Container = styled.View`
     margin-bottom: 41px;
     justify-content: space-between;
     elevation: 4; // android
+    
     /* shadow-color:  ${({theme}) => theme.dark_gray};
     shadow-offset: 0px 4px;
     shadow-opacity: 0.25;
