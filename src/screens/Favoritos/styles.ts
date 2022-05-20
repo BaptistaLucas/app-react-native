@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 export const Container = styled.View`
     flex: 1;
     background-color: ${({theme}) => theme.background};
-    padding: 0 16px;
+    padding: 0px 16px;
 `;
 
 export const Header = styled.View`
@@ -18,5 +18,4 @@ export const Titulo = styled.Text`
     font-size: 16px;
     font-family: ${({theme}) => theme.fonts.BOLD};
     color: ${({theme}) => theme.primary};
-    
 `;

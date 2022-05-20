@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import FavoriteCard from "../../components/FavoriteCard";
 import { FavoritosDTO } from "../dtos/FavoritosDTO";
 import { PokemonDTO } from "../dtos/PokemonDTO";
@@ -45,25 +45,21 @@ async function removeStorage(id: number){
                     Favoritos
                 </Titulo>
             </Header>
+            <View style={{
+                flex: 1,
+                marginTop: 33  
+            }}>
+
+                <FlatList
+                    data={favoritos}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({item}) => (
+                        <FavoriteCard pokemon={item.pokemon} funcaoRemover = {()=>removeStorage(item.pokemon.id)}/>
+                    )}
+                         
+                />
+            </View>
             {/* <FavoriteCard pokemon={pokemon}/> */}
-            <FlatList
-                data={favoritos}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({item}) => (
-                    <FavoriteCard pokemon={item.pokemon} funcaoRemover = {()=>removeStorage(item.pokemon.id)}/>
-                )}
-                style={{
-                    flex:1,
-                    paddingTop:33,
-                    paddingRight: 0,
-                    paddingBottom:0,
-                   
-                }}
-                contentContainerStyle ={{
-                    alignItems: "center",
-                    
-                }}
-            />
         </Container>
         
     )

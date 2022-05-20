@@ -38,6 +38,7 @@ export const Nome = styled.Text`
     font-family: ${({theme}) => theme.fonts.BOLD};
     color: ${({theme}) => theme.white};
     font-size: 24px;
+    margin-right: 19px;
 `;
 
 export const Codigo = styled.Text`
